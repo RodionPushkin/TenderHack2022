@@ -30,11 +30,13 @@ export default {
     position: absolute;
     left: 0;
     top: 100vh;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 500px;
     aspect-ratio: 1/1;
     object-fit: contain;
     z-index: 3;
+    user-select: none;
+    pointer-events: none;
   }
   .round-dark{
     position: absolute;
@@ -48,18 +50,21 @@ export default {
     z-index: 1;
     filter: blur(5px);
   }
-  .round-light{
+  .round-light {
     position: absolute;
-    left: 80vw;
-    top: 10vh;
-    transform: translate(-50%,-50%);
+    left: 100vw;
+    top: 55vh;
+    transform: translate(-50%, -50%);
     width: 300px;
     aspect-ratio: 1/1;
     border-radius: 50%;
     background: var(--bg-light-color);
+    //background: var(--bg-dark-color);
     z-index: 1;
   }
-  .noise{
+  .noise {
+    user-select: none;
+    pointer-events: none;
     position: absolute;
     left: 0;
     top: 0;

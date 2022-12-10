@@ -26,7 +26,7 @@
       </label>
       <nav class="nav">
         <router-link to="/" @click="isMenuOpened = false">главная</router-link>
-        <!--        <router-link @click="isMenuOpened = false" to="/panel">панель</router-link>-->
+        <router-link to="/panel" @click="isMenuOpened = false">панель</router-link>
       </nav>
     </div>
   </header>

@@ -2,7 +2,11 @@
   <headerComponent></headerComponent>
   <background></background>
   <mainComponent>
-    <router-view></router-view>
+    <router-view v-slot="{ Component, route }">
+      <transition mode="out-in">
+        <component :is="Component"/>
+      </transition>
+    </router-view>
   </mainComponent>
   <footerComponent></footerComponent>
 </template>
@@ -255,5 +259,15 @@ button, .button {
     font-size: 40px;
     line-height: 50px;
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

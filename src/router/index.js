@@ -29,18 +29,18 @@ const routes = [
         name: 'главная',
         component: () => import('../views/home/index.vue')
     },
-    // {
-    //     path: '/auth',
-    //     name: 'вход',
-    //     beforeEnter: authGuard,
-    //     component: () => import('../views/auth/index.vue')
-    // },
-    // {
-    //     path: '/panel',
-    //     name: 'панель',
-    //     beforeEnter: authGuard,
-    //     component: () => import('../views/panel/index.vue')
-    // },
+    {
+        path: '/auth',
+        name: 'вход',
+        beforeEnter: authGuard,
+        component: () => import('../views/auth/index.vue')
+    },
+    {
+        path: '/panel',
+        name: 'панель',
+        beforeEnter: authGuard,
+        component: () => import('../views/panel/index.vue')
+    },
     {path: '/:pathMatch(.*)*', component: () => import('../views/404/index.vue')}
 ]
 

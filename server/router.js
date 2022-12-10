@@ -26,4 +26,24 @@ module.exports = router => {
             next(e)
         }
     })
+    router.get(`/api/user`, (req, res) => {
+        if (req.cookies?.token) {
+            if (!req.cookies.token) {
+                res.status(200).json(['ok'])
+            } else {
+                res.status(401).send('not authorized')
+            }
+        } else if (req.query?.token) {
+            if (req.query.token != null) {
+                res.status(200).json(['ok'])
+            } else {
+                res.status(401).send('not authorized')
+            }
+        } else {
+            res.status(401).send('not authorized')
+        }
+    })
+    router.put(`/api/user/auth`, (req, res) => {
+        res.status(200).cookie('token', 'ok', {expires: new Date(Date.now() + 900000), httpOnly: true}).json(['ok'])
+    })
 }
