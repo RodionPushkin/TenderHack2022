@@ -1,4 +1,4 @@
-const serverUrl = '/api/'
+const serverUrl = 'http://localhost/api/'
 
 class api {
     async get(url, headers) {

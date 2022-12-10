@@ -2,16 +2,14 @@ import {createRouter, createWebHistory} from 'vue-router'
 import api from "@/api/index.js";
 
 const authGuard = async (to, from, next) => {
-    let isAuthorized
-    let auth = await api.get(`user?token=${localStorage.getItem('token')}`).then(r => r)
-    if (auth.length > 0) {
-        isAuthorized = true
-    } else {
-        isAuthorized = false
+    let isAuthorized = false
+    if (localStorage.getItem('token')) {
+        let auth = await api.get(`user?token=${localStorage.getItem('token')}`).then(r => r)
+        isAuthorized = auth.length > 0
     }
     if (isAuthorized) {
         if (to.path == "/auth") {
-            next({ path: "/panel" })
+            next({path: "/panel"})
         } else {
             next()
         }

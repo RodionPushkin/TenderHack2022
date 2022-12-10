@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="m">Перетащите или прикрепите файл, для обновления данных</h1>
-    <fileinput usedrag="true"></fileinput>
+    <fileinput accept=".csv" usedrag="true"></fileinput>
   </div>
 </template>
 <script>

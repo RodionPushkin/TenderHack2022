@@ -2,7 +2,12 @@
   <div class="container">
     <h1 class="m">Предиктивная <span>система анализа</span> котировочных сессий</h1>
     <search @searchinput="(e)=>{search(e)}"></search>
-    <linechart class="linechart" :datasets="chartdata.datasets" :labels="chartdata.labels" :options="chartdata.options"></linechart>
+    <div>
+      <h2>название корректировочной сессии</h2>
+      <h3></h3>
+    </div>
+    <linechart v-if="showchart" ref="chart" :datasets="chartdata.datasets" :labels="chartdata.labels"
+               :options="chartdata.options" class="linechart"></linechart>
   </div>
 </template>
 <script>
@@ -18,6 +23,7 @@ export default {
   components: {Fileinput, Checkbox, Textinput, linechart, barchart,search},
   data() {
     return {
+      showchart: false,
       chartdata: {
         delayed: false,
         labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -79,6 +85,32 @@ export default {
     }
   },
   mounted() {
+    if (this.$store.getters.ISFIRSTLOAD == true) {
+      setTimeout(() => {
+        this.showchart = true
+      }, 4000)
+    } else {
+      this.showchart = true
+    }
+    setInterval(() => {
+      for (let i = 0; i < 13; i++) {
+        this.chartdata.datasets[0].data[i] = 0
+        this.chartdata.datasets[1].data[i] = NaN
+      }
+      for (let i = 0; i < 13; i++) {
+        let data = Math.floor(Math.random() * 1000)
+        this.chartdata.datasets[0].data[i] = data
+        this.chartdata.datasets[1].data[i] = NaN
+        if (i > 9) {
+          this.chartdata.datasets[1].data[i] = data
+        }
+        if (i > 10) {
+          this.chartdata.datasets[0].data[i] = NaN
+          this.chartdata.datasets[1].data[i] = data
+        }
+      }
+      if (this.$refs?.chart?.$refs.chart.chart) this.$refs?.chart?.$refs.chart.chart.update();
+    }, 7000)
   },
   methods: {
     search(data){

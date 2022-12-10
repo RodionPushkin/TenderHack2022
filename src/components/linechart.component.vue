@@ -5,6 +5,7 @@
       :options="config.options"
       :height="0"
       :width="0"
+      ref="chart"
     />
   </div>
 </template>
@@ -48,8 +49,9 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.$refs.chart)
     // console.log(this.config)
-  }
+  },
 }
 </script>
 

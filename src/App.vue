@@ -1,4 +1,5 @@
 <template>
+  <preloader></preloader>
   <headerComponent></headerComponent>
   <background></background>
   <mainComponent>
@@ -16,17 +17,16 @@ import headerComponent from "@/components/header.component";
 import mainComponent from "@/components/main.component";
 import footerComponent from "@/components/footer.component";
 import Background from "@/components/background.component";
+import Preloader from "@/components/preloader.component";
 
 export default {
-  components: {Background, headerComponent, mainComponent, footerComponent},
-  data(){
-    return{
-    }
+  components: {Preloader, Background, headerComponent, mainComponent, footerComponent},
+  data() {
+    return {}
   },
   mounted() {
   },
-  methods:{
-  }
+  methods: {}
 }
 </script>
 <style lang="scss">

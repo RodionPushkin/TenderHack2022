@@ -1,5 +1,6 @@
 <template>
   <form class="container" @submit.prevent="submit">
+    <h1 class="m">Вход в панель</h1>
     <textinput ref="email" placeholder="почта" required="true" type="email" value="email@email.com"></textinput>
     <textinput ref="password" placeholder="пароль" required="true" type="password" value="password"></textinput>
     <button type="submit">войти</button>
@@ -20,7 +21,13 @@ export default {
   },
   methods: {
     async submit() {
-      await api.get(`user?token=${localStorage.getItem('token')}`).then(r => r)
+      await api.put(`user/auth`).then(r => r).then((res) => {
+        console.log(res)
+        localStorage.token = res[0]
+        this.$router.push('/panel')
+      }).catch((err) => {
+        console.log(err)
+      })
       console.log(this.$refs.email.value, this.$refs.password.value)
     }
   }

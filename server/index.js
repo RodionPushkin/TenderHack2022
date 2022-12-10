@@ -29,22 +29,22 @@ const swaggerOptions = {
     swaggerDefinition: {
         info: {
             title: "Документация",
-            description: "ниже представлена документация по моему api",
+            description: "ниже представлена документация к api hackers54.ru",
             contact: {
                 name: "Rodion Pushkin",
                 url: "https://t.me/RodionPushkin"
             },
-            servers: ['http://127.0.0.1']
+            servers: ['https://hackers54.ru']
         }
     },
-    apis: ['./router.js', './peer.js']
+    apis: ['./router.js']
 }
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-// app.use(require('cors')({
-//     credentials: true,
-//     methods: ['OPTION', 'GET', 'POST', 'PUT', 'DELETE'],
-//     origin: process.env.DOMAIN ? process.env.DOMAIN : 'http://localhost'
-// }));
+app.use(require('cors')({
+    credentials: true,
+    methods: ['OPTION', 'GET', 'POST', 'PUT', 'DELETE'],
+    origin: '*'
+}));
 // app.use(limiter({
 //     windowMs: 3 * 60 * 1000,
 //     max: 100,
