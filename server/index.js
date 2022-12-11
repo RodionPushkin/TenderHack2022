@@ -59,7 +59,7 @@ app.use(require('cors')({
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/',
-    abortOnLimit: true,
+    // abortOnLimit: true,
     limits: {fileSize: 50 * 1024 * 1024},
 }));
 app.use(ruid());

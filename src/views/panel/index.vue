@@ -39,8 +39,12 @@ export default {
       }, 1000)
       let data = new FormData()
       data.append('file', this.file.target.files[0])
-      api.post('/upload', undefined,).then(res => {
-
+      api.upload('upload', undefined, data).then(res => {
+        console.log(res)
+        this.isloading = false
+        this.time = 300
+        clearInterval(interval)
+        this.file = undefined
       }).catch(err => {
         console.log(err)
       })

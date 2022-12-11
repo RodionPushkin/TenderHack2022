@@ -1,4 +1,5 @@
 const serverUrl = 'https://hackers54.ru/api/'
+// const serverUrl = 'http://localhost/api/'
 
 class api {
     async get(url, headers) {
@@ -15,6 +16,27 @@ class api {
 
     async delete(url, headers, body) {
         return await this.request('delete', url, body, headers)
+    }
+
+    async upload(url, headers, body) {
+        if (!headers) {
+            headers = {}
+        }
+        let data = {
+            method: 'post',
+            headers: headers,
+        }
+        if (body) {
+            data.body = body
+        }
+        return await fetch(serverUrl + url, data)
+            .then(response => response.json())
+            .then((res) => {
+                return res
+            })
+            .catch((err) => {
+                return []
+            })
     }
 
     async request(method, url, body, headers) {

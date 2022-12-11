@@ -9,6 +9,7 @@ const db = require('./database')
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const geoip = require('geoip-lite')
+const path = require('path')
 module.exports = router => {
     /**
      * @swagger
@@ -87,23 +88,31 @@ module.exports = router => {
      *           '200':
      *               description: что-то отдает
      * */
-    router.post(`/api/upload`, [corsMiddleware], (req, res) => {
-        if (req.cookies?.token) {
-            if (req.cookies.token) {
-                res.status(200).json(['ok'])
-                console.log(req.files);
-            } else {
-                res.status(401).send('not authorized')
-            }
-        } else if (req.query?.token) {
-            if (req.query.token != null) {
-                res.status(200).json(['ok'])
-                console.log(req.files);
-            } else {
-                res.status(401).send('not authorized')
-            }
-        } else {
-            res.status(401).send('not authorized')
-        }
+    router.post(`/api/upload`, [corsMiddleware], async (req, res) => {
+        // console.log(req.files.file);
+        let newFileName = `${new Date().getTime()}.csv`
+        console.log(path.join(__dirname, "/python/", `${newFileName}`))
+        req.files.file.mv(path.join(__dirname, "/python/", `${newFileName}`), () => {
+
+        })
+        setTimeout(() => {
+            res.json('ok')
+        }, 20000)
+        // let runPy = new Promise(function(success, nosuccess) {
+        //     const { spawn } = require('child_process');
+        //     const pyprog = spawn('python3', [path.join(__dirname,"/python/","check.py"), String(req.files.file.name)]);
+        //     pyprog.stdout.on('data', (data) => {
+        //         success(data);
+        //     });
+        //     pyprog.stderr.on('data', (data) => {
+        //         nosuccess(data);
+        //     });
+        // });
+        // return await runPy.then((data)=>{
+        //     if(data.toString().includes('false')){
+        //         return false
+        //     }
+        //     return true
+        // })
     })
 }
