@@ -105,6 +105,12 @@ export default {
     a {
       user-select: none;
     }
+
+    @media screen and (max-width: 768px) {
+      color: var(--font-color4);
+      font-weight: 600;
+      font-size: 20px;
+    }
   }
 
   input {

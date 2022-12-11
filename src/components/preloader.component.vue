@@ -14,7 +14,7 @@ export default {
   name: "preloader",
   data() {
     return {
-      letter: 'п',
+      letter: '',
       word: Math.random() > 0.5 ? 'tenderhack 2022' : 'чайник'
     }
   },
