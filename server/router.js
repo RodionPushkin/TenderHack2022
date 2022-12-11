@@ -10,22 +10,22 @@ const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const geoip = require('geoip-lite')
 module.exports = router => {
-/**
- * @swagger
- * /api:
- *   get:
- *       description: api is working
- *       responses:
- *           '200':
- *               description: all right
- * */
-router.get(`/api`, [corsAllMiddleware], (req, res, next) => {
-    try {
-        res.json({data: `api is working`})
-    } catch (e) {
-        next(e)
-    }
-})
+    /**
+     * @swagger
+     * /api:
+     *   get:
+     *       description: api is working
+     *       responses:
+     *           '200':
+     *               description: all right
+     * */
+    router.get(`/api`, [corsAllMiddleware], (req, res, next) => {
+        try {
+            res.json({data: `api is working`})
+        } catch (e) {
+            next(e)
+        }
+    })
     /**
      * @swagger
      * /api/user:

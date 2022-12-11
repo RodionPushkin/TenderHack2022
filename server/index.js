@@ -25,7 +25,7 @@ const limiter = require("express-rate-limit");
 const slowDown = require("express-slow-down");
 const compression = require("compression");
 const errorMiddleware = require('./middleware/error.middleware')
-const swaggerOptions = {
+const swaggerDocs = swaggerJsDoc({
     swaggerDefinition: {
         info: {
             title: "Документация",
@@ -37,9 +37,8 @@ const swaggerOptions = {
             servers: ['https://hackers54.ru']
         }
     },
-    apis: ['./router.js']
-}
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+    apis: ['./server/router.js']
+});
 app.use(require('cors')({
     credentials: true,
     methods: ['OPTION', 'GET', 'POST', 'PUT', 'DELETE'],
@@ -86,6 +85,9 @@ let peer
 if (process.env.NODE_ENV == 'production') {
     app.enable('trust proxy')
     app.use(httpsRedirect())
+    app.use((req, res, next) => {
+        req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+    })
     const ssl = {
         key: fs.readFileSync(path.join(__dirname, 'privkey.pem')),
         cert: fs.readFileSync(path.join(__dirname, 'fullchain.pem'))

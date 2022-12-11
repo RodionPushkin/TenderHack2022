@@ -2,12 +2,29 @@
   <div class="container">
     <h1 class="m">Предиктивная <span>система анализа</span> котировочных сессий</h1>
     <search @searchinput="(e)=>{search(e)}"></search>
-    <div>
-      <h2>название корректировочной сессии</h2>
-      <h3></h3>
+    <div class="card">
+      <div>
+        <p class="name">название</p>
+        <p class="price">цена</p>
+      </div>
+      <div>
+        <p class="place">регион</p>
+        <p class="date">дата</p>
+        <p class="count">количество участников</p>
+      </div>
     </div>
-    <linechart v-if="showchart" ref="chart" :datasets="chartdata.datasets" :labels="chartdata.labels"
-               :options="chartdata.options" class="linechart"></linechart>
+    <div class="chart-wrapper">
+      <linechart v-if="showchart" ref="chart" :datasets="chartdata.datasets" :labels="chartdata.labels"
+                 :options="chartdata.options" class="linechart"></linechart>
+    </div>
+    <div class="chart-wrapper">
+      <linechart v-if="showchart" ref="chart2" :datasets="chartdata.datasets" :labels="chartdata.labels"
+                 :options="chartdata.options" class="linechart"></linechart>
+    </div>
+    <div class="chart-wrapper">
+      <linechart v-if="showchart" ref="chart3" :datasets="chartdata.datasets" :labels="chartdata.labels"
+                 :options="chartdata.options" class="linechart"></linechart>
+    </div>
   </div>
 </template>
 <script>
@@ -20,7 +37,7 @@ import search from "@/components/search.component";
 
 export default {
   name: "home",
-  components: {Fileinput, Checkbox, Textinput, linechart, barchart,search},
+  components: {Fileinput, Checkbox, Textinput, linechart, barchart, search},
   data() {
     return {
       showchart: false,
@@ -110,13 +127,15 @@ export default {
         }
       }
       if (this.$refs?.chart?.$refs.chart.chart) this.$refs?.chart?.$refs.chart.chart.update();
+      if (this.$refs?.chart2?.$refs.chart.chart) this.$refs?.chart2?.$refs.chart.chart.update();
+      if (this.$refs?.chart3?.$refs.chart.chart) this.$refs?.chart3?.$refs.chart.chart.update();
     }, 7000)
   },
   methods: {
-    search(data){
+    search(data) {
       console.log(data)
     },
-    copy(){
+    copy() {
       navigator.clipboard.writeText(this.$store.getters.PEERID)
     }
   }
@@ -134,15 +153,65 @@ export default {
   }
   gap: 32px;
   flex-direction: column;
+
   h1 {
     color: var(--font-color2);
     user-select: none;
+
     span {
       color: var(--main-color);
     }
   }
-  .linechart{
-    height: 350px;
+
+  .chart-wrapper {
+    .linechart {
+      height: 350px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      overflow-x: scroll;
+      .linechart {
+        width: 1000px;
+      }
+    }
+  }
+
+  .card {
+    width: 100%;
+    display: flex;
+    border-radius: var(--border-radius);
+    background: var(--font-color);
+    padding: 24px;
+    flex-direction: column;
+    color: var(--font-color4);
+    font-weight: 500;
+    font-size: 18px;
+    gap: 32px;
+    min-height: 200px;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+
+      &:last-child {
+        margin-top: auto;
+      }
+
+      .date {
+        margin-right: auto;
+      }
+
+      .name {
+        width: 80%;
+      }
+
+      .price {
+        margin-left: auto;
+      }
+    }
   }
 }
 </style>

@@ -19,15 +19,23 @@
   <transition name="fade">
     <div class="filters" v-if="isFiltersOpened">
       <p>Фильтры</p>
+      <textinput placeholder="ОКПД2"></textinput>
+      <textinput placeholder="КПГЗ"></textinput>
+      <textinput placeholder="Регион"></textinput>
+      <textinput placeholder="НМЦК"></textinput>
+      <textinput placeholder="Дата" type="date"></textinput>
+      <textinput placeholder="ИНН"></textinput>
     </div>
   </transition>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import Textinput from "@/components/textinput.component";
 
 export default {
   name: "Search",
+  components: {Textinput},
   emits: ["searchinput"],
   data() {
     return {
@@ -159,4 +167,11 @@ export default {
   }
 }
 
+</style>
+<style lang="scss">
+.filters {
+  label {
+    color: var(--font-color4) !important;
+  }
+}
 </style>

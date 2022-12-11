@@ -4,6 +4,8 @@
     <img alt="" src="@/assets/noise.png">
     <img alt="" src="@/assets/noise.png">
     <span class="m">{{ letter }}</span>
+    <div class="round-dark"></div>
+    <div class="round-light"></div>
   </div>
 </template>
 
@@ -55,6 +57,33 @@ export default {
   background: var(--bg-color);
   transition: opacity 0.3s;
   transition-delay: 0.3s;
+
+  .round-dark {
+    position: absolute;
+    left: 30vw;
+    top: 80vh;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--bg-dark-color);
+    z-index: 1;
+    filter: blur(5px);
+  }
+
+  .round-light {
+    position: absolute;
+    left: 100vw;
+    top: 55vh;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--bg-light-color);
+    //background: var(--bg-dark-color);
+    z-index: 1;
+    filter: blur(5px);
+  }
 
   img {
     height: 33%;
