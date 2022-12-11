@@ -35,6 +35,7 @@ import Fileinput from "@/components/fileinput.component";
 import linechart from "@/components/linechart.component";
 import barchart from "@/components/barchart.component";
 import search from "@/components/search.component";
+import api from "@/api";
 
 export default {
   name: "home",
@@ -136,6 +137,19 @@ export default {
   methods: {
     search(data) {
       console.log(data)
+      let url = 'search'
+      url += data.search != undefined ? `?search=${data.search['0']}` : ''
+      url += data.filters.date != undefined ? `&date=${data.filters.date[0]}0${data.filters.date[1]}${data.filters.date[2]}` : ''
+      url += data.filters.okpd != undefined ? `&okpd=${data.filters.okpd['0']}` : ''
+      url += data.filters.kpgz != undefined ? `&kpgz=${data.filters.kpgz['0']}` : ''
+      url += data.filters.region != undefined ? `&region=${data.filters.region['0']}` : ''
+      url += data.filters.nmck != undefined ? `&nmck=${data.filters.nmck['0']}` : ''
+      url += data.filters.inn != undefined ? `&inn=${data.filters.inn['0']}` : ''
+      api.get(url).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     copy() {
       navigator.clipboard.writeText(this.$store.getters.PEERID)

@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   position: fixed;
-  background: rgba(255, 255, 255, 0.001);
+  background: rgba(12, 12, 12, 0.4);
   backdrop-filter: blur(4px);
   top: 0;
   left: 0;
