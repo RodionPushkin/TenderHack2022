@@ -19,11 +19,11 @@
                  :options="chartdata.options" class="linechart"></linechart>
     </div>
     <div class="chart-wrapper">
-      <linechart v-if="showchart" ref="chart2" :datasets="chartdata.datasets" :labels="chartdata.labels"
+      <linechart v-if="showchart" ref="chart2" :datasets="chartdata.datasets2" :labels="chartdata.labels"
                  :options="chartdata.options" class="linechart"></linechart>
     </div>
     <div class="chart-wrapper">
-      <linechart v-if="showchart" ref="chart3" :datasets="chartdata.datasets" :labels="chartdata.labels"
+      <linechart v-if="showchart" ref="chart3" :datasets="chartdata.datasets3" :labels="chartdata.labels"
                  :options="chartdata.options" class="linechart"></linechart>
     </div>
   </div>
@@ -47,20 +47,51 @@ export default {
       chartdata: {
         delayed: false,
         labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        datasets: [{
-          label: 'прошлые показатели',
-          data: [0, 20, 20, 60, 60, 60, 120, 140, 180, 120, NaN, NaN, NaN],
-          borderColor: "#FFFFFF",
-          backgroundColor: "#FFFFFF",
-          fill: false,
-        }, {
-          label: 'предсказано',
-          data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 120, 10, 120, 130],
-          borderDash: [5, 5],
-          borderColor: "#6BD600",
-          backgroundColor: "#6BD600",
-          fill: false,
-        }],
+        datasets: [
+          {
+            label: 'прошлые показатели',
+            data: [0, 20, 20, 60, 60, 60, 120, 140, 180, 120, NaN, NaN, NaN],
+            borderColor: "#FFFFFF",
+            backgroundColor: "#FFFFFF",
+            fill: false,
+          }, {
+            label: 'предсказано',
+            data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 120, 10, 120, 130],
+            borderDash: [5, 5],
+            borderColor: "#6BD600",
+            backgroundColor: "#6BD600",
+            fill: false,
+          }],
+        datasets2: [
+          {
+            label: 'прошлые показатели',
+            data: [0, 20, 20, 60, 60, 60, 120, 140, 180, 120, NaN, NaN, NaN],
+            borderColor: "#FFFFFF",
+            backgroundColor: "#FFFFFF",
+            fill: false,
+          }, {
+            label: 'предсказано',
+            data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 120, 10, 120, 130],
+            borderDash: [5, 5],
+            borderColor: "#6BD600",
+            backgroundColor: "#6BD600",
+            fill: false,
+          }],
+        datasets3: [
+          {
+            label: 'прошлые показатели',
+            data: [0, 20, 20, 60, 60, 60, 120, 140, 180, 120, NaN, NaN, NaN],
+            borderColor: "#FFFFFF",
+            backgroundColor: "#FFFFFF",
+            fill: false,
+          }, {
+            label: 'предсказано',
+            data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 120, 10, 120, 130],
+            borderDash: [5, 5],
+            borderColor: "#6BD600",
+            backgroundColor: "#6BD600",
+            fill: false,
+          }],
         options: {
           tension: 0.4,
           responsive: true,
@@ -116,17 +147,33 @@ export default {
       for (let i = 0; i < 13; i++) {
         this.chartdata.datasets[0].data[i] = 0
         this.chartdata.datasets[1].data[i] = NaN
+        this.chartdata.datasets2[0].data[i] = 0
+        this.chartdata.datasets2[1].data[i] = NaN
+        this.chartdata.datasets3[0].data[i] = 0
+        this.chartdata.datasets3[1].data[i] = NaN
       }
       for (let i = 0; i < 13; i++) {
         let data = Math.floor(Math.random() * 1000)
+        let data2 = Math.floor(Math.random() * 100)
+        let data3 = Math.floor(Math.random() * 2000)
         this.chartdata.datasets[0].data[i] = data
         this.chartdata.datasets[1].data[i] = NaN
+        this.chartdata.datasets2[0].data[i] = data2
+        this.chartdata.datasets2[1].data[i] = NaN
+        this.chartdata.datasets3[0].data[i] = data3
+        this.chartdata.datasets3[1].data[i] = NaN
         if (i > 9) {
           this.chartdata.datasets[1].data[i] = data
+          this.chartdata.datasets2[1].data[i] = data2
+          this.chartdata.datasets3[1].data[i] = data3
         }
         if (i > 10) {
           this.chartdata.datasets[0].data[i] = NaN
           this.chartdata.datasets[1].data[i] = data
+          this.chartdata.datasets2[0].data[i] = NaN
+          this.chartdata.datasets2[1].data[i] = data2
+          this.chartdata.datasets3[0].data[i] = NaN
+          this.chartdata.datasets3[1].data[i] = data3
         }
       }
       if (this.$refs?.chart?.$refs.chart.chart) this.$refs?.chart?.$refs.chart.chart.update();
