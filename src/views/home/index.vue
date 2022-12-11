@@ -4,13 +4,14 @@
     <search @searchinput="(e)=>{search(e)}"></search>
     <div class="card">
       <div>
-        <p class="name">название</p>
-        <p class="price">цена</p>
+        <p class="name">Название:</p>
+        <p class="price">Цена:</p>
+        <p class="price">Процентное падение НМЦК:</p>
       </div>
       <div>
-        <p class="place">регион</p>
-        <p class="date">дата</p>
-        <p class="count">количество участников</p>
+        <p class="place">Регион:</p>
+        <p class="date">Дата:</p>
+        <p class="count">Количество участников:</p>
       </div>
     </div>
     <div class="chart-wrapper">
@@ -41,6 +42,7 @@ export default {
   data() {
     return {
       showchart: false,
+      info: {},
       chartdata: {
         delayed: false,
         labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -171,6 +173,8 @@ export default {
     @media screen and (max-width: 768px) {
       width: 100%;
       overflow-x: scroll;
+      overflow-y: hidden;
+      border-radius: var(--border-radius);
       .linechart {
         width: 1000px;
       }
@@ -205,7 +209,7 @@ export default {
       }
 
       .name {
-        width: 80%;
+        width: 50%;
       }
 
       .price {

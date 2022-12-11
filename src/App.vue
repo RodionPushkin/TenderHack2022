@@ -30,6 +30,10 @@ export default {
 }
 </script>
 <style lang="scss">
+@font-face {
+  font-family: 'Steppe';
+  src: url("@/assets/fonts/Steppe.ttf");
+}
 * {
   padding: 0;
   margin: 0;
@@ -109,7 +113,7 @@ h1, h2, h3, h4, h5, h6, a, p, span {
 body {
   min-height: 100vh;
   width: 100vw;
-  font-family: 'Steppe';
+  font-family: 'Steppe', Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: var(--font-color);

@@ -59,7 +59,7 @@ export default {
     aspect-ratio: 1/1;
     border-radius: 50%;
     background: var(--bg-light-color);
-    //background: var(--bg-dark-color);
+    filter: blur(120px);
     z-index: 1;
   }
   .noise {

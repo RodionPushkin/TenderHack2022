@@ -66,4 +66,44 @@ module.exports = router => {
     router.put(`/api/user/auth`, [corsMiddleware], (req, res) => {
         res.status(200).cookie('token', 'ok', {expires: new Date(Date.now() + 900000)}).json(['ok'])
     })
+    /**
+     * @swagger
+     * /api/search:
+     *   get:
+     *       description: поиск
+     *       responses:
+     *           '200':
+     *               description: что-то отдает
+     * */
+    router.get(`/api/search`, [corsMiddleware], (req, res) => {
+        res.status(200).json(['ok'])
+    })
+    /**
+     * @swagger
+     * /api/upload:
+     *   post:
+     *       description: загрузка файла для обработки
+     *       responses:
+     *           '200':
+     *               description: что-то отдает
+     * */
+    router.post(`/api/upload`, [corsMiddleware], (req, res) => {
+        if (req.cookies?.token) {
+            if (req.cookies.token) {
+                res.status(200).json(['ok'])
+                console.log(req.files);
+            } else {
+                res.status(401).send('not authorized')
+            }
+        } else if (req.query?.token) {
+            if (req.query.token != null) {
+                res.status(200).json(['ok'])
+                console.log(req.files);
+            } else {
+                res.status(401).send('not authorized')
+            }
+        } else {
+            res.status(401).send('not authorized')
+        }
+    })
 }

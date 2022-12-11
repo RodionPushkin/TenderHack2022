@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="text" placeholder="поиск" @keyup="search" maxlength="200">
+    <input ref="name" maxlength="200" placeholder="поиск" type="text" @keyup="search">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
       <circle cx="11" cy="11" r="8"></circle>
@@ -17,15 +17,16 @@
     <!--    </div>-->
   </div>
   <transition name="fade">
-    <div class="filters" v-if="isFiltersOpened">
+    <form v-if="isFiltersOpened" ref="filters" class="filters" @submit.prevent="submit">
       <p>Фильтры</p>
-      <textinput placeholder="ОКПД2"></textinput>
-      <textinput placeholder="КПГЗ"></textinput>
-      <textinput placeholder="Регион"></textinput>
-      <textinput placeholder="НМЦК"></textinput>
-      <textinput placeholder="Дата" type="date"></textinput>
-      <textinput placeholder="ИНН"></textinput>
-    </div>
+      <textinput ref="okpd" placeholder="ОКПД2" required="true" value="ОКПД2" @input="search"></textinput>
+      <textinput ref="kpgz" placeholder="КПГЗ" required="true" value="КПГЗ" @input="search"></textinput>
+      <textinput ref="region" placeholder="Регион" required="true" value="регион" @input="search"></textinput>
+      <textinput ref="nmck" placeholder="НМЦК" required="true" value="НМЦК" @input="search"></textinput>
+      <textinput ref="date" placeholder="Дата" required="true" type="date" value="2022-09-29"
+                 @input="search"></textinput>
+      <textinput ref="inn" placeholder="ИНН" @input="search"></textinput>
+    </form>
   </transition>
 </template>
 
@@ -42,16 +43,24 @@ export default {
       isFiltersOpened: true,
       timer: 0,
       filters: {},
+      name: ''
     }
   },
   methods: {
-    search({target}) {
-      let text = String(target.value)
+    search() {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        text = text.slice(0, 200)
-        this.$emit('searchinput', text)
+        this.name = this.$refs.name?.value.split(0, 200)
+        this.filters.okpd = this.$refs.okpd.value?.split(0, 200)
+        this.filters.kpgz = this.$refs.kpgz.value?.split(0, 200)
+        this.filters.region = this.$refs.region.value?.split(0, 200)
+        this.filters.nmck = this.$refs.nmck.value?.split(0, 200)
+        this.filters.date = this.$refs.date.value?.split(0, 200)
+        this.filters.inn = this.$refs.inn.value?.split(0, 200)
+        this.$emit('searchinput', {search: this.name, filters: this.filters})
       }, 700);
+    },
+    submit() {
     }
   },
   computed: {}
@@ -136,6 +145,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  @media screen and (max-width: 1285px) {
+    justify-content: center;
+  }
 
   > p {
     width: 100%;

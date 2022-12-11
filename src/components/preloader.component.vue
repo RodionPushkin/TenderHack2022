@@ -80,9 +80,8 @@ export default {
     aspect-ratio: 1/1;
     border-radius: 50%;
     background: var(--bg-light-color);
-    //background: var(--bg-dark-color);
     z-index: 1;
-    filter: blur(5px);
+    filter: blur(120px);
   }
 
   img {
@@ -92,6 +91,7 @@ export default {
     transition: transform 0.4s;
     user-select: none;
     pointer-events: none;
+    z-index: 3;
   }
 
   span {
